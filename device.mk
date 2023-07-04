@@ -18,7 +18,7 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/base.mk)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/gsi_keys.mk)
 
 # Configure Virtual A/B
-$(call inherit-product, $(SRC_TARGET_DIR)/product/virtual_ab_ota.mk)
+#$(call inherit-product, $(SRC_TARGET_DIR)/product/virtual_ab_ota.mk)
 
 # Configure virtual_ab compression.mk
 #$(call inherit-product, $(SRC_TARGET_DIR)/product/virtual_ab_ota/compression.mk)
@@ -27,14 +27,14 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/virtual_ab_ota.mk)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/emulated_storage.mk)
 
 # Configure twrp
-#$(call inherit-product, vendor/twrp/config/common.mk)
+$(call inherit-product, vendor/twrp/config/common.mk)
 
 PRODUCT_PACKAGES += \
     bootctrl.taro \
     bootctrl.taro.recovery
 
 # A/B related packages
-ENABLE_AB := true
+#ENABLE_AB := true
 #ENABLE_VIRTUAL_AB := true
 
 PRODUCT_PACKAGES += update_engine \
