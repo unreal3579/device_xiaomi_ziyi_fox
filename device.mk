@@ -35,7 +35,7 @@ PRODUCT_PACKAGES += \
 
 # A/B related packages
 ENABLE_AB := true
-ENABLE_VIRTUAL_AB := true
+#ENABLE_VIRTUAL_AB := true
 
 PRODUCT_PACKAGES += update_engine \
     update_engine_client \
