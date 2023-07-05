@@ -5,6 +5,7 @@ if [ -f $FOX_MANIFEST_ROOT/bootable/recovery/orangefox_defaults.go -a -f $FOX_MA
 		export TW_DEFAULT_LANGUAGE="ru"
 	fi
 export OF_SCREEN_H=2400
+export FOX_USE_TWRP_RECOVERY_IMAGE_BUILDER=1
 export ALLOW_MISSING_DEPENDENCIES=true
 export FOX_BUILD_TYPE="Stable"
 export OF_STATUS_H=99
