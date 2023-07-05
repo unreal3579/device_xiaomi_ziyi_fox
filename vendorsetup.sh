@@ -1,4 +1,10 @@
-export FOX_BUILD_DEVICE=ziyi
+FOX_MANIFEST_ROOT=$(gettop)
+if [ -f $FOX_MANIFEST_ROOT/bootable/recovery/orangefox_defaults.go -a -f $FOX_MANIFEST_ROOT/bootable/recovery/orangefox.mk ]; then
+	if [ -z "$TW_DEFAULT_LANGUAGE" ]; then
+		unset TW_DEFAULT_LANGUAGE
+		export TW_DEFAULT_LANGUAGE="ru"
+	fi
+fi
 export OF_SCREEN_H=2400 
 export OF_STATUS_H=99
 export OF_STATUS_INDENT_LEFT=48 
@@ -25,4 +31,4 @@ export FOX_USE_XZ_UTILS=1
 export FOX_USE_NANO_EDITOR=1
 export OF_DYNAMIC_FULL_SIZE=9126805504
 export OF_NO_REFLASH_CURRENT_ORANGEFOX=1
-export OF_DEFAULT_TIMEZONE="SAUST-3;SAUDT" 
+export OF_DEFAULT_TIMEZONE="SAUST-3" 
