@@ -233,5 +233,8 @@ SOONG_CONFIG_NAMESPACES += ufsbsg
 SOONG_CONFIG_ufsbsg += ufsframework
 SOONG_CONFIG_ufsbsg_ufsframework := bsg
 
+# OFRP
+FOX_BUILD_DEVICE := ziyi
+
 # The path to a temperature sensor
 TW_CUSTOM_CPU_TEMP_PATH := "/sys/devices/virtual/thermal/thermal_zone50/temp"
