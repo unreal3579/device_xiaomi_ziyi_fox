@@ -5,6 +5,7 @@ if [ -f $FOX_MANIFEST_ROOT/bootable/recovery/orangefox_defaults.go -a -f $FOX_MA
 		export TW_DEFAULT_LANGUAGE="ru"
 	fi
 export OF_SCREEN_H=2400
+export ALLOW_MISSING_DEPENDENCIES=true
 export FOX_BUILD_TYPE="Stable"
 export OF_STATUS_H=99
 export OF_STATUS_INDENT_LEFT=48 
@@ -33,7 +34,7 @@ export OF_DYNAMIC_FULL_SIZE=9126805504
 export OF_NO_REFLASH_CURRENT_ORANGEFOX=1
 export OF_DEFAULT_TIMEZONE="SAUST-3"
 
-	# let's see what are our build VARs
+# let's see what are our build VARs
 	if [ -n "$FOX_BUILD_LOG_FILE" -a -f "$FOX_BUILD_LOG_FILE" ]; then
 	   export | grep "FOX" >> $FOX_BUILD_LOG_FILE
 	   export | grep "OF_" >> $FOX_BUILD_LOG_FILE
