@@ -8,20 +8,20 @@
 LOCAL_PATH := device/xiaomi/ziyi
 DEVICE_PATH := device/xiaomi/ziyi
 
+# Enable updating of APEXes
+$(call inherit-product, $(SRC_TARGET_DIR)/product/updatable_apex.mk)
+
 # Configure base.mk
 $(call inherit-product, $(SRC_TARGET_DIR)/product/base.mk)
-
-# Configure core_64_bit_only.mk
-#$(call inherit-product, $(SRC_TARGET_DIR)/product/core_64_bit_only.mk)
 
 # Configure gsi_keys.mk
 $(call inherit-product, $(SRC_TARGET_DIR)/product/gsi_keys.mk)
 
 # Configure Virtual A/B
-#$(call inherit-product, $(SRC_TARGET_DIR)/product/virtual_ab_ota.mk)
+$(call inherit-product, $(SRC_TARGET_DIR)/product/virtual_ab_ota.mk)
 
 # Configure virtual_ab compression.mk
-#$(call inherit-product, $(SRC_TARGET_DIR)/product/virtual_ab_ota/compression.mk)
+$(call inherit-product, $(SRC_TARGET_DIR)/product/virtual_ab_ota/compression.mk)
 
 # Configure SDCard replacement functionality
 $(call inherit-product, $(SRC_TARGET_DIR)/product/emulated_storage.mk)
@@ -31,8 +31,8 @@ PRODUCT_PACKAGES += \
     bootctrl.taro.recovery
 
 # A/B related packages
-#ENABLE_AB := true
-#ENABLE_VIRTUAL_AB := true
+ENABLE_AB := true
+ENABLE_VIRTUAL_AB := true
 
 PRODUCT_PACKAGES += update_engine \
     update_engine_client \
