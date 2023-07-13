@@ -26,9 +26,6 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/gsi_keys.mk)
 # Configure SDCard replacement functionality
 $(call inherit-product, $(SRC_TARGET_DIR)/product/emulated_storage.mk)
 
-# Configure twrp
-#$(call inherit-product, vendor/twrp/config/common.mk)
-
 PRODUCT_PACKAGES += \
     bootctrl.taro \
     bootctrl.taro.recovery
