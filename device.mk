@@ -14,6 +14,9 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/updatable_apex.mk)
 # Configure base.mk
 $(call inherit-product, $(SRC_TARGET_DIR)/product/base.mk)
 
+# Configure core_64_bit_only.mk
+$(call inherit-product, $(SRC_TARGET_DIR)/product/core_64_bit_only.mk)
+
 # Configure gsi_keys.mk
 $(call inherit-product, $(SRC_TARGET_DIR)/product/gsi_keys.mk)
 
@@ -43,6 +46,12 @@ PRODUCT_PACKAGES += update_engine \
 
 PRODUCT_PACKAGES += \
   update_engine_sideload
+
+AB_OTA_POSTINSTALL_CONFIG += \
+    RUN_POSTINSTALL_system=true \
+    POSTINSTALL_PATH_system=system/bin/otapreopt_script \
+    FILESYSTEM_TYPE_system=erofs \
+    POSTINSTALL_OPTIONAL_system=true
 
 AB_OTA_POSTINSTALL_CONFIG += \
     RUN_POSTINSTALL_vendor=true \
@@ -84,7 +93,8 @@ TARGET_HAS_GENERIC_KERNEL_HEADERS := true
 
 # Userdata checkpoint
 PRODUCT_PACKAGES += \
-    checkpoint_gc
+    checkpoint_gc \
+	otapreopt_script
 
 # VNDK API
 PRODUCT_TARGET_VNDK_VERSION := 31

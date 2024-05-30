@@ -3,8 +3,8 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 #
-
-#DEVICE_PATH := device/xiaomi/ziyi
+PRODUCT_RELEASE_NAME := ziyi
+DEVICE_PATH := device/xiaomi/$(PRODUCT_RELEASE_NAME)
 
 # Inherit from those products. Most specific first.
 $(call inherit-product, $(SRC_TARGET_DIR)/product/core_64_bit.mk)
@@ -16,7 +16,8 @@ $(call inherit-product, vendor/twrp/config/common.mk)
 # Inherit from ziyi device
 $(call inherit-product, device/xiaomi/ziyi/device.mk)
 
-PRODUCT_RELEASE_NAME := ziyi
+# Fox settings
+$(call inherit-product-if-exists, device/xiaomi/ziyi/fox_ziyi.mk)
 
 PRODUCT_DEVICE := ziyi
 PRODUCT_NAME := twrp_ziyi
