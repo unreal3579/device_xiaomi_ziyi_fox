@@ -28,7 +28,7 @@ OF_HIDE_NOTCH := 1
 
 # other stuff
 OF_USE_GREEN_LED := 0
-OF_QUICK_BACKUP_LIST := "/boot;/data;"
+OF_QUICK_BACKUP_LIST := /boot;/data;
 
 # default keymaster service version
 OF_DEFAULT_KEYMASTER_VERSION := 4.1
