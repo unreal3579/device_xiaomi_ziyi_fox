@@ -4,7 +4,27 @@ if [ -f $FOX_MANIFEST_ROOT/bootable/recovery/orangefox_defaults.go -a -f $FOX_MA
 		unset TW_DEFAULT_LANGUAGE
 		export TW_DEFAULT_LANGUAGE="ru"
 	fi
-export FOX_VERSION=$(date +%y.%m.%d)
+#export FOX_VERSION=$(date +%y.%m.%d)
+
+# Avatar Settings
+if [ -n "$OF_MAINTAINER_AVATAR" ]; then
+	if [ ! -f "$OF_MAINTAINER_AVATAR" ]; then
+		# some colour codes
+		RED='\033[0;31m'
+		GREEN='\033[0;32m'
+		ORANGE='\033[0;33m'
+		BLUE='\033[0;34m'
+		PURPLE='\033[0;35m'
+		echo -e "${RED}-- File \"$OF_MAINTAINER_AVATAR\" not found  ...${NC}"
+		echo -e "${ORANGE}-- Downloading...${NC}"
+		mkdir -p misc
+		curl https://github.com/unreal3579/test/blob/main/jgWTT9sjyDA.jpg >> $OF_MAINTAINER_AVATAR
+		echo -e "${BLUE}-- Successfully Downloaded the Avatar Image \"$OF_MAINTAINER_AVATAR\" ...${NC}"
+		echo -e "${PURPLE}-- Using A Custom Maintainer Avatar from the Downloaded Image \"$OF_MAINTAINER_AVATAR\" ...${NC}"
+		echo -e "${GREEN}-- Done!"
+	fi
+fi
+
 export LC_ALL="C"
 export TARGET_DEVICE_ALT="ziyigl"
 export FOX_USE_TWRP_RECOVERY_IMAGE_BUILDER=1
