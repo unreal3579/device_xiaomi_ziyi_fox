@@ -5,6 +5,7 @@ if [ -f $FOX_MANIFEST_ROOT/bootable/recovery/orangefox_defaults.go -a -f $FOX_MA
 		export TW_DEFAULT_LANGUAGE="ru"
 	fi
 export FOX_VERSION="R11.2_$(date +%y.%m.%d)"
+export OF_MAINTAINER_AVATAR="misc/jgWTT9sjyDA.jpg"
 
 # Avatar Settings
 if [ -n "$OF_MAINTAINER_AVATAR" ]; then
