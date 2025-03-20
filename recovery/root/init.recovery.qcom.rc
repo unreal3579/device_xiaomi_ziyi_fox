@@ -32,24 +32,26 @@ on early-fs
     write /proc/sys/walt/sched_lib_name "recovery,magiskboot,Updater,updater,update_engine_sideload"
     write /proc/sys/walt/sched_lib_mask_force 255
 
-on init
-    start boot-hal-1-2
-    setprop sys.usb.configfs 1
-    start vibratorfeature		
-
 on fs
     wait /dev/block/platform/soc/${ro.boot.bootdevice}
     symlink /dev/block/platform/soc/${ro.boot.bootdevice} /dev/block/bootdevice
-
-on fs
+    wait /dev/block/platform/soc/${ro.boot.bootdevice}
+    symlink /dev/block/platform/soc/${ro.boot.bootdevice} /dev/block/bootdevice
+    write /proc/sys/kernel/firmware_config/force_sysfs_fallback 1
+    mkdir /vendor/firmware_mnt
+    mkdir /vendor/firmware
+    mount_all /vendor/etc/charger_fstab.qti --early
+	mount vfat /dev/block/bootdevice/by-name/modem${ro.boot.slot_suffix} /vendor/firmware_mnt ro
+	mkdir /firmware
+    mount none /vendor/firmware_mnt/image /firmware bind rec
+    wait /sys/kernel/boot_adsp/boot
+    write /sys/kernel/boot_adsp/boot 1
+    wait /sys/class/power_supply/battery
     chmod 0660 /dev/qseecom
     chown system drmrpc /dev/qseecom
     chmod 0664 /dev/ion
     chown system system /dev/ion
     install_keyring
-
-on boot
-    setprop sys.usb.config adb
 
 on init
 	mkdir /mnt/vendor/persist
@@ -60,6 +62,9 @@ on init
     start boot-hal-1-2
     write /sys/class/backlight/panel0-backlight/brightness 204
     setprop sys.usb.configfs 1
+    start boot-hal-1-2
+    setprop sys.usb.configfs 1
+    start vibratorfeature		
 
 service vibratorfeature /vendor/bin/hw/vendor.xiaomi.hardware.vibratorfeature.service
     user root
@@ -69,6 +74,7 @@ service vibratorfeature /vendor/bin/hw/vendor.xiaomi.hardware.vibratorfeature.se
     
 on boot
     start vibratorfeature-hal-service
+    setprop sys.usb.config adb
 
 on property:twrp.modules.loaded=true
     # Load ADSP firmware for PMIC
@@ -84,15 +90,3 @@ on property:ro.boot.usbcontroller=*
     wait /sys/class/udc/${ro.boot.usbcontroller} 0
     write /sys/bus/platform/devices/${ro.boot.usb.dwc3_msm:-a600000.ssusb}/mode peripheral
     wait /sys/class/udc/${ro.boot.usbcontroller} 1
-
-on fs
-    wait /dev/block/platform/soc/${ro.boot.bootdevice}
-    symlink /dev/block/platform/soc/${ro.boot.bootdevice} /dev/block/bootdevice
-    write /proc/sys/kernel/firmware_config/force_sysfs_fallback 1
-    mkdir /vendor/firmware_mnt
-    mkdir /vendor/firmware
-    mount_all /vendor/etc/charger_fstab.qti --early
-    mount none /vendor/firmware_mnt/image /vendor/firmware bind rec
-    wait /sys/kernel/boot_adsp/boot
-    write /sys/kernel/boot_adsp/boot 1
-    wait /sys/class/power_supply/battery
