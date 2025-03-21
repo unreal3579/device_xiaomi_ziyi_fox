@@ -29,7 +29,7 @@ service vibratorfeature /vendor/bin/hw/vendor.xiaomi.hardware.vibratorfeature.se
     group root input
     onrestart restart vibratorfeature
     seclabel u:r:recovery:s0
-    
+
 on early-init
     write /sys/fs/selinux/enforce 0
 
@@ -48,7 +48,7 @@ on fs
     install_keyring
 
 on init
-	mkdir /mnt/vendor/persist
+    mkdir /mnt/vendor/persist
     chmod 0777 /mnt/vendor/persist
     chown root:root /mnt/vendor/persist
     mount /dev/block/by-name/persist /mnt/vendor/persist
@@ -62,17 +62,17 @@ on boot
     setprop sys.usb.config adb
 
 on property:twrp.modules.loaded=true
-	# Mount firmware
-	mkdir /firmware
-	mount vfat /dev/block/bootdevice/by-name/modem${ro.boot.slot_suffix} /firmware ro
+    # Mount firmware
+    mkdir /firmware
+    mount vfat /dev/block/bootdevice/by-name/modem${ro.boot.slot_suffix} /firmware ro
     # Load ADSP firmware for PMIC
     wait /sys/kernel/boot_adsp/boot
     write /sys/kernel/boot_adsp/boot 1
     wait /sys/class/power_supply/battery
     start health-hal-2-1
     start vibratorfeature-hal-service
-	umount /firmware
-	
+    umount /firmware
+
 on property:ro.boot.usbcontroller=*
     setprop sys.usb.controller ${ro.boot.usbcontroller}
     wait /sys/bus/platform/devices/${ro.boot.usb.dwc3_msm:-a600000.ssusb}/mode
