@@ -4,7 +4,7 @@ if [ -f $FOX_MANIFEST_ROOT/bootable/recovery/orangefox_defaults.go -a -f $FOX_MA
 		unset TW_DEFAULT_LANGUAGE
 		export TW_DEFAULT_LANGUAGE="ru"
 	fi
-export FOX_MAINTAINER_PATCH_VERSION="$(date +%Y%M%D)"
+export FOX_MAINTAINER_PATCH_VERSION="$(date +%y%m%d)"
 export LC_ALL="C"
 export TARGET_DEVICE_ALT="ziyigl"
 export FOX_USE_TWRP_RECOVERY_IMAGE_BUILDER=1
